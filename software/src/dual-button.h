@@ -25,10 +25,13 @@
 #include <stdint.h>
 #include "bricklib/com/com_common.h"
 
+#define BUTTON_L 0
+#define BUTTON_R 1
+
 #define BUTTON_STATE_PRESSED 0
 #define BUTTON_STATE_RELEASED 1
 
-#define BUTTON_DEBOUNCE_TIME 200 // in ms
+#define BUTTON_DEBOUNCE_TIME 25 // in ms
 
 #define LED_STATE_AUTO_TOGGLE_ON 0
 #define LED_STATE_AUTO_TOGGLE_OFF 1
@@ -46,8 +49,8 @@ typedef struct {
 
 typedef struct {
 	MessageHeader header;
-	uint8_t led1;
-	uint8_t led2;
+	uint8_t led_l;
+	uint8_t led_r;
 } __attribute__((__packed__)) SetLEDState;
 
 typedef struct {
@@ -56,8 +59,8 @@ typedef struct {
 
 typedef struct {
 	MessageHeader header;
-	uint8_t led1;
-	uint8_t led2;
+	uint8_t led_l;
+	uint8_t led_r;
 } __attribute__((__packed__)) GetLEDStateReturn;
 
 typedef struct {
@@ -66,16 +69,16 @@ typedef struct {
 
 typedef struct {
 	MessageHeader header;
-	uint8_t button1;
-	uint8_t button2;
+	uint8_t button_l;
+	uint8_t button_r;
 } __attribute__((__packed__)) GetButtonStateReturn;
 
 typedef struct {
 	MessageHeader header;
-	uint8_t button1;
-	uint8_t button2;
-	uint8_t led1;
-	uint8_t led2;
+	uint8_t button_l;
+	uint8_t button_r;
+	uint8_t led_l;
+	uint8_t led_r;
 } __attribute__((__packed__)) StateChanged;
 
 void set_led_state(const ComType com, const SetLEDState *data);

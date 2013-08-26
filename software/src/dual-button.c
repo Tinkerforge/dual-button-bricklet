@@ -21,6 +21,9 @@
 
 #include "dual-button.h"
 
+#include "bricklib/bricklet/bricklet_communication.h"
+#include "brickletlib/bricklet_entry.h"
+
 #include "config.h"
 
 void invocation(const ComType com, const uint8_t *data) {
@@ -48,25 +51,25 @@ void invocation(const ComType com, const uint8_t *data) {
 }
 
 void set_led_state(const ComType com, const SetLEDState *data) {
-	if(data->led1 < LED_STATE_AUTO_TOGGLE_ON || data->led1 > LED_STATE_OFF ||
-	   data->led2 < LED_STATE_AUTO_TOGGLE_ON || data->led2 > LED_STATE_OFF) {
+	if(data->led_r < LED_STATE_AUTO_TOGGLE_ON || data->led_r > LED_STATE_OFF ||
+	   data->led_l < LED_STATE_AUTO_TOGGLE_ON || data->led_l > LED_STATE_OFF) {
 		BA->com_return_error(data, sizeof(SetLEDState), MESSAGE_ERROR_CODE_INVALID_PARAMETER, com);
 		return;
 	}
 
-	BC->led1 = data->led1;
-	BC->led2 = data->led2;
+	BC->led_r = data->led_r;
+	BC->led_l = data->led_l;
 
-	if(BC->led1 == LED_STATE_AUTO_TOGGLE_ON || BC->led1 == LED_STATE_ON) {
-		PIN_LED1.pio->PIO_CODR = PIN_LED1.mask;
+	if(BC->led_r == LED_STATE_AUTO_TOGGLE_ON || BC->led_r == LED_STATE_ON) {
+		PIN_LED_R.pio->PIO_CODR = PIN_LED_R.mask;
 	} else {
-		PIN_LED1.pio->PIO_SODR = PIN_LED1.mask;
+		PIN_LED_R.pio->PIO_SODR = PIN_LED_R.mask;
 	}
 
-	if(BC->led2 == LED_STATE_AUTO_TOGGLE_ON || BC->led2 == LED_STATE_ON) {
-		PIN_LED2.pio->PIO_CODR = PIN_LED2.mask;
+	if(BC->led_l == LED_STATE_AUTO_TOGGLE_ON || BC->led_l == LED_STATE_ON) {
+		PIN_LED_L.pio->PIO_CODR = PIN_LED_L.mask;
 	} else {
-		PIN_LED2.pio->PIO_SODR = PIN_LED2.mask;
+		PIN_LED_L.pio->PIO_SODR = PIN_LED_L.mask;
 	}
 
 	BA->com_return_setter(com, data);
@@ -76,103 +79,106 @@ void get_led_state(const ComType com, const GetLEDState *data) {
 	GetLEDStateReturn glsr;
 	glsr.header        = data->header;
 	glsr.header.length = sizeof(GetLEDStateReturn);
-	glsr.led1          = BC->led1;
-	glsr.led2          = BC->led2;
+	glsr.led_r          = BC->led_r;
+	glsr.led_l          = BC->led_l;
 
 	BA->send_blocking_with_timeout(&glsr, sizeof(GetLEDStateReturn), com);
-
 }
 
 void get_button_state(const ComType com, const GetButtonState *data) {
 	GetButtonStateReturn gbsr;
 	gbsr.header        = data->header;
 	gbsr.header.length = sizeof(GetButtonStateReturn);
-	gbsr.button1       = BC->button1;
-	gbsr.button2       = BC->button2;
+	gbsr.button_r       = BC->button_r;
+	gbsr.button_l       = BC->button_l;
 
 	BA->send_blocking_with_timeout(&gbsr, sizeof(GetButtonStateReturn), com);
 }
 
 void constructor(void) {
-	PIN_BUTTON1.type = PIO_INPUT;
-	PIN_BUTTON1.attribute = PIO_PULLUP;
-    BA->PIO_Configure(&PIN_BUTTON1, 1);
+	_Static_assert(sizeof(BrickContext) <= BRICKLET_CONTEXT_MAX_SIZE, "BrickContext too big");
 
-	PIN_BUTTON2.type = PIO_INPUT;
-	PIN_BUTTON2.attribute = PIO_PULLUP;
-    BA->PIO_Configure(&PIN_BUTTON2, 1);
+	PIN_BUTTON_R.type = PIO_INPUT;
+	PIN_BUTTON_R.attribute = PIO_PULLUP;
+    BA->PIO_Configure(&PIN_BUTTON_R, 1);
 
-    PIN_LED1.type = PIO_OUTPUT_1;
-    PIN_LED1.attribute = PIO_DEFAULT;
-    BA->PIO_Configure(&PIN_LED1, 1);
+	PIN_BUTTON_L.type = PIO_INPUT;
+	PIN_BUTTON_L.attribute = PIO_PULLUP;
+    BA->PIO_Configure(&PIN_BUTTON_L, 1);
 
-    PIN_LED2.type = PIO_OUTPUT_1;
-    PIN_LED2.attribute = PIO_DEFAULT;
-    BA->PIO_Configure(&PIN_LED2, 1);
+    PIN_LED_R.type = PIO_OUTPUT_0;
+    PIN_LED_R.attribute = PIO_DEFAULT;
+    BA->PIO_Configure(&PIN_LED_R, 1);
 
-	BC->button1 = BUTTON_STATE_RELEASED;
-	BC->button2 = BUTTON_STATE_RELEASED;
-	BC->led1    = LED_STATE_AUTO_TOGGLE_OFF;
-	BC->led2    = LED_STATE_AUTO_TOGGLE_OFF;
+    PIN_LED_L.type = PIO_OUTPUT_0;
+    PIN_LED_L.attribute = PIO_DEFAULT;
+    BA->PIO_Configure(&PIN_LED_L, 1);
 
-	BC->button1_debounce = 0;
-	BC->button2_debounce = 0;
+	BC->button_r = BUTTON_STATE_RELEASED;
+	BC->button_l = BUTTON_STATE_RELEASED;
+	BC->led_r    = LED_STATE_AUTO_TOGGLE_ON;
+	BC->led_l    = LED_STATE_AUTO_TOGGLE_ON;
+
+	BC->button_r_debounce = 0;
+	BC->button_l_debounce = 0;
 }
 
 void destructor(void) {
-	PIN_BUTTON1.type = PIO_INPUT;
-	PIN_BUTTON1.attribute = PIO_PULLUP;
-    BA->PIO_Configure(&PIN_BUTTON1, 1);
+	PIN_BUTTON_R.type = PIO_INPUT;
+	PIN_BUTTON_R.attribute = PIO_PULLUP;
+    BA->PIO_Configure(&PIN_BUTTON_R, 1);
 
-	PIN_BUTTON2.type = PIO_INPUT;
-	PIN_BUTTON2.attribute = PIO_PULLUP;
-    BA->PIO_Configure(&PIN_BUTTON2, 1);
+	PIN_BUTTON_L.type = PIO_INPUT;
+	PIN_BUTTON_L.attribute = PIO_PULLUP;
+    BA->PIO_Configure(&PIN_BUTTON_L, 1);
 
-    PIN_LED1.type = PIO_INPUT;
-    PIN_LED1.attribute = PIO_PULLUP;
-    BA->PIO_Configure(&PIN_LED1, 1);
+    PIN_LED_R.type = PIO_INPUT;
+    PIN_LED_R.attribute = PIO_PULLUP;
+    BA->PIO_Configure(&PIN_LED_R, 1);
 
-    PIN_LED2.type = PIO_INPUT;
-    PIN_LED2.attribute = PIO_PULLUP;
-    BA->PIO_Configure(&PIN_LED2, 1);
+    PIN_LED_L.type = PIO_INPUT;
+    PIN_LED_L.attribute = PIO_PULLUP;
+    BA->PIO_Configure(&PIN_LED_L, 1);
 }
 
 void tick(const uint8_t tick_type) {
 	if(tick_type & TICK_TASK_TYPE_CALCULATION) {
-		if(BC->button1_debounce == 0) {
-			if(PIN_BUTTON1.pio->PIO_PDSR & PIN_BUTTON1.mask) {
-				if(BC->button1 != BUTTON_STATE_RELEASED) {
-					BC->button1 = BUTTON_STATE_RELEASED;
-					BC->button1_debounce = BUTTON_DEBOUNCE_TIME;
+		if(BC->button_r_debounce == 0) {
+			if(PIN_BUTTON_R.pio->PIO_PDSR & PIN_BUTTON_R.mask) {
+				if(BC->button_r != BUTTON_STATE_RELEASED) {
+					BC->button_r = BUTTON_STATE_RELEASED;
+					BC->button_r_debounce = BUTTON_DEBOUNCE_TIME;
 					BC->state_changed = true;
 				}
 			} else {
-				if(BC->button1 != BUTTON_STATE_PRESSED) {
-					BC->button1 = BUTTON_STATE_PRESSED;
-					BC->button1_debounce = BUTTON_DEBOUNCE_TIME;
+				if(BC->button_r != BUTTON_STATE_PRESSED) {
+					next_led_toggle_state(BUTTON_R);
+					BC->button_r = BUTTON_STATE_PRESSED;
+					BC->button_r_debounce = BUTTON_DEBOUNCE_TIME;
 					BC->state_changed = true;
 				}
 			}
 		} else {
-			BC->button1_debounce--;
+			BC->button_r_debounce--;
 		}
 
-		if(BC->button2_debounce == 0) {
-			if(PIN_BUTTON2.pio->PIO_PDSR & PIN_BUTTON2.mask) {
-				if(BC->button2 != BUTTON_STATE_RELEASED) {
-					BC->button2 = BUTTON_STATE_RELEASED;
-					BC->button2_debounce = BUTTON_DEBOUNCE_TIME;
+		if(BC->button_l_debounce == 0) {
+			if(PIN_BUTTON_L.pio->PIO_PDSR & PIN_BUTTON_L.mask) {
+				if(BC->button_l != BUTTON_STATE_RELEASED) {
+					BC->button_l = BUTTON_STATE_RELEASED;
+					BC->button_l_debounce = BUTTON_DEBOUNCE_TIME;
 					BC->state_changed = true;
 				}
 			} else {
-				if(BC->button2 != BUTTON_STATE_PRESSED) {
-					BC->button2 = BUTTON_STATE_PRESSED;
-					BC->button2_debounce = BUTTON_DEBOUNCE_TIME;
+				if(BC->button_l != BUTTON_STATE_PRESSED) {
+					next_led_toggle_state(BUTTON_L);
+					BC->button_l = BUTTON_STATE_PRESSED;
+					BC->button_l_debounce = BUTTON_DEBOUNCE_TIME;
 					BC->state_changed = true;
 				}
 			}
 		} else {
-			BC->button2_debounce--;
+			BC->button_l_debounce--;
 		}
 	}
 
@@ -187,10 +193,10 @@ void tick(const uint8_t tick_type) {
 void send_state_changed_callback(void) {
 	StateChanged sc;
 	BA->com_make_default_header(&sc, BS->uid, sizeof(StateChanged), FID_STATE_CHANGED);
-	sc.button1 = BC->button1;
-	sc.button2 = BC->button2;
-	sc.led1    = BC->led1;
-	sc.led2    = BC->led2;
+	sc.button_r = BC->button_r;
+	sc.button_l = BC->button_l;
+	sc.led_r    = BC->led_r;
+	sc.led_l    = BC->led_l;
 
 	BA->send_blocking_with_timeout(&sc,
 								   sizeof(StateChanged),
@@ -199,24 +205,24 @@ void send_state_changed_callback(void) {
 
 void next_led_toggle_state(const uint8_t button) {
 	switch(button) {
-		case 1: {
-			if(BC->led1 == LED_STATE_AUTO_TOGGLE_OFF) {
-				PIN_LED1.pio->PIO_CODR = PIN_LED1.mask;
-				BC->led1 = LED_STATE_AUTO_TOGGLE_ON;
-			} else if(BC->led1 == LED_STATE_AUTO_TOGGLE_ON) {
-				PIN_LED1.pio->PIO_SODR = PIN_LED1.mask;
-				BC->led1 = LED_STATE_AUTO_TOGGLE_OFF;
+		case BUTTON_R: {
+			if(BC->led_r == LED_STATE_AUTO_TOGGLE_OFF) {
+				PIN_LED_R.pio->PIO_CODR = PIN_LED_R.mask;
+				BC->led_r = LED_STATE_AUTO_TOGGLE_ON;
+			} else if(BC->led_r == LED_STATE_AUTO_TOGGLE_ON) {
+				PIN_LED_R.pio->PIO_SODR = PIN_LED_R.mask;
+				BC->led_r = LED_STATE_AUTO_TOGGLE_OFF;
 			}
 			break;
 		}
 
-		case 2: {
-			if(BC->led2 == LED_STATE_AUTO_TOGGLE_OFF) {
-				PIN_LED2.pio->PIO_CODR = PIN_LED2.mask;
-				BC->led2 = LED_STATE_AUTO_TOGGLE_ON;
-			} else if(BC->led2 == LED_STATE_AUTO_TOGGLE_ON) {
-				PIN_LED2.pio->PIO_SODR = PIN_LED2.mask;
-				BC->led2 = LED_STATE_AUTO_TOGGLE_OFF;
+		case BUTTON_L: {
+			if(BC->led_l == LED_STATE_AUTO_TOGGLE_OFF) {
+				PIN_LED_L.pio->PIO_CODR = PIN_LED_L.mask;
+				BC->led_l = LED_STATE_AUTO_TOGGLE_ON;
+			} else if(BC->led_l == LED_STATE_AUTO_TOGGLE_ON) {
+				PIN_LED_L.pio->PIO_SODR = PIN_LED_L.mask;
+				BC->led_l = LED_STATE_AUTO_TOGGLE_OFF;
 			}
 			break;
 		}

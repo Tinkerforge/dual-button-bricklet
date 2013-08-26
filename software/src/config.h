@@ -39,10 +39,10 @@
 
 #define BRICKLET_DEVICE_IDENTIFIER 230
 
-#define PIN_BUTTON1 (BS->pin1_ad)
-#define PIN_LED1    (BS->pin2_da)
-#define PIN_BUTTON2 (BS->pin3_pwm)
-#define PIN_LED2    (BS->pin4_io)
+#define PIN_BUTTON_L (BS->pin1_ad)
+#define PIN_LED_L    (BS->pin2_da)
+#define PIN_BUTTON_R (BS->pin3_pwm)
+#define PIN_LED_R    (BS->pin4_io)
 
 #define LOGGING_LEVEL LOGGING_DEBUG
 #define DEBUG_BRICKLET 0
@@ -51,13 +51,13 @@
 #define INVOCATION_IN_BRICKLET_CODE
 
 typedef struct {
-	uint8_t button1;
-	uint8_t button2;
-	uint8_t led1;
-	uint8_t led2;
+	uint8_t button_r;
+	uint8_t button_l;
+	uint8_t led_r;
+	uint8_t led_l;
 
-	uint16_t button1_debounce;
-	uint16_t button2_debounce;
+	uint16_t button_r_debounce;
+	uint16_t button_l_debounce;
 
 	bool state_changed;
 
