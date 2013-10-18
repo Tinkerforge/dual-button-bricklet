@@ -43,11 +43,44 @@ void invocation(const ComType com, const uint8_t *data) {
 			return;
 		}
 
+		case FID_SET_SELECTED_LED_STATE: {
+			set_selected_led_state(com, (SetSelectedLEDState*)data);
+			return;
+		}
+
 		default: {
 			BA->com_return_error(data, sizeof(MessageHeader), MESSAGE_ERROR_CODE_NOT_SUPPORTED, com);
 			return;
 		}
 	}
+}
+
+void set_selected_led_state(const ComType com, const SetSelectedLEDState *data) {
+	if(data->state < LED_STATE_AUTO_TOGGLE_ON || data->state > LED_STATE_OFF ||
+	   data->led < LED_L || data->led > LED_R) {
+		BA->com_return_error(data, sizeof(SetLEDState), MESSAGE_ERROR_CODE_INVALID_PARAMETER, com);
+		return;
+	}
+
+	if(data->led == LED_L) {
+		BC->led_l = data->state;
+
+		if(BC->led_l == LED_STATE_AUTO_TOGGLE_ON || BC->led_l == LED_STATE_ON) {
+			PIN_LED_L.pio->PIO_CODR = PIN_LED_L.mask;
+		} else {
+			PIN_LED_L.pio->PIO_SODR = PIN_LED_L.mask;
+		}
+	} else {
+		BC->led_r = data->state;
+
+		if(BC->led_r == LED_STATE_AUTO_TOGGLE_ON || BC->led_r == LED_STATE_ON) {
+			PIN_LED_R.pio->PIO_CODR = PIN_LED_L.mask;
+		} else {
+			PIN_LED_R.pio->PIO_SODR = PIN_LED_L.mask;
+		}
+	}
+
+	BA->com_return_setter(com, data);
 }
 
 void set_led_state(const ComType com, const SetLEDState *data) {

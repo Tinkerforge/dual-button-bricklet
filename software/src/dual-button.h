@@ -28,6 +28,9 @@
 #define BUTTON_L 0
 #define BUTTON_R 1
 
+#define LED_L 0
+#define LED_R 1
+
 #define BUTTON_STATE_PRESSED 0
 #define BUTTON_STATE_RELEASED 1
 
@@ -42,6 +45,7 @@
 #define FID_GET_LED_STATE 2
 #define FID_GET_BUTTON_STATE 3
 #define FID_STATE_CHANGED 4
+#define FID_SET_SELECTED_LED_STATE 5
 
 typedef struct {
 	MessageHeader header;
@@ -81,9 +85,16 @@ typedef struct {
 	uint8_t led_r;
 } __attribute__((__packed__)) StateChanged;
 
+typedef struct {
+	MessageHeader header;
+	uint8_t led;
+	uint8_t state;
+} __attribute__((__packed__)) SetSelectedLEDState;
+
 void set_led_state(const ComType com, const SetLEDState *data);
 void get_led_state(const ComType com, const GetLEDState *data);
 void get_button_state(const ComType com, const GetButtonState *data);
+void set_selected_led_state(const ComType com, const SetSelectedLEDState *data);
 
 void next_led_toggle_state(const uint8_t button);
 void send_state_changed_callback(void);
