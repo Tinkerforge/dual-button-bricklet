@@ -12,6 +12,8 @@
 void cb_state_changed(uint8_t button_l, uint8_t button_r, 
                       uint8_t led_l, uint8_t led_r, 
                       void *user_data) {
+	(void)led_l; // avoid unused parameter warning
+	(void)led_r; // avoid unused parameter warning
 	(void)user_data; // avoid unused parameter warning
 
 	if(button_l == DUAL_BUTTON_BUTTON_STATE_PRESSED) {

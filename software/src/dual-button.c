@@ -139,18 +139,18 @@ void constructor(void) {
 	PIN_BUTTON_L.attribute = PIO_PULLUP;
     BA->PIO_Configure(&PIN_BUTTON_L, 1);
 
-    PIN_LED_R.type = PIO_OUTPUT_0;
+    PIN_LED_R.type = PIO_OUTPUT_1;
     PIN_LED_R.attribute = PIO_DEFAULT;
     BA->PIO_Configure(&PIN_LED_R, 1);
 
-    PIN_LED_L.type = PIO_OUTPUT_0;
+    PIN_LED_L.type = PIO_OUTPUT_1;
     PIN_LED_L.attribute = PIO_DEFAULT;
     BA->PIO_Configure(&PIN_LED_L, 1);
 
 	BC->button_r = BUTTON_STATE_RELEASED;
 	BC->button_l = BUTTON_STATE_RELEASED;
-	BC->led_r    = LED_STATE_AUTO_TOGGLE_ON;
-	BC->led_l    = LED_STATE_AUTO_TOGGLE_ON;
+	BC->led_r    = LED_STATE_AUTO_TOGGLE_OFF;
+	BC->led_l    = LED_STATE_AUTO_TOGGLE_OFF;
 
 	BC->button_r_debounce = 0;
 	BC->button_l_debounce = 0;
