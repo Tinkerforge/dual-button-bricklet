@@ -13,19 +13,19 @@ $uid = 'XYZ'; // Change to your UID
 // Callback function for state_changed callback
 function cb_state_changed($button_l, $button_r, $led_l, $led_r)
 {
-	if($button_l == BrickletDualButton::BUTTON_STATE_PRESSED) {
-		echo "Left button pressed\n";
-	} else {
-		echo "Left button released\n";
-	}
+    if($button_l == BrickletDualButton::BUTTON_STATE_PRESSED) {
+        echo "Left button pressed\n";
+    } else {
+        echo "Left button released\n";
+    }
 
-	if($button_r == BrickletDualButton::BUTTON_STATE_PRESSED) {
-		echo "Right button pressed\n";
-	} else {
-		echo "Right button released\n";
-	}
+    if($button_r == BrickletDualButton::BUTTON_STATE_PRESSED) {
+        echo "Right button pressed\n";
+    } else {
+        echo "Right button released\n";
+    }
 
-	echo "\n";
+    echo "\n";
 }
 
 $ipcon = new IPConnection(); // Create IP connection
