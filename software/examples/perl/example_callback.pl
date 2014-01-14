@@ -8,7 +8,7 @@ use constant PORT => 4223;
 use constant UID => 'fdd'; # Change to your UID
 
 my $ipcon = IPConnection->new(); # Create IP connection
-my $db = BrickletDualButton->new(&UID, $ipcon); # Create device object
+our $db = BrickletDualButton->new(&UID, $ipcon); # Create device object
 
 # Callback function for state changed callback
 sub cb_state_changed
