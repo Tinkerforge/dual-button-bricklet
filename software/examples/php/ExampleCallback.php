@@ -6,9 +6,9 @@ require_once('Tinkerforge/BrickletDualButton.php');
 use Tinkerforge\IPConnection;
 use Tinkerforge\BrickletDualButton;
 
-$host = 'localhost';
-$port = 4223;
-$uid = 'XYZ'; // Change to your UID
+const HOST = 'localhost';
+const PORT = 4223;
+const UID = 'XYZ'; // Change to your UID
 
 // Callback function for state_changed callback
 function cb_state_changed($button_l, $button_r, $led_l, $led_r)
@@ -29,9 +29,9 @@ function cb_state_changed($button_l, $button_r, $led_l, $led_r)
 }
 
 $ipcon = new IPConnection(); // Create IP connection
-$al = new BrickletDualButton($uid, $ipcon); // Create device object
+$al = new BrickletDualButton(UID, $ipcon); // Create device object
 
-$ipcon->connect($host, $port); // Connect to brickd
+$ipcon->connect(HOST, PORT); // Connect to brickd
 // Don't use device before ipcon is connected
 
 // Register state changed callback to function cb_state_changed
