@@ -74,9 +74,9 @@ void set_selected_led_state(const ComType com, const SetSelectedLEDState *data) 
 		BC->led_r = data->state;
 
 		if(BC->led_r == LED_STATE_AUTO_TOGGLE_ON || BC->led_r == LED_STATE_ON) {
-			PIN_LED_R.pio->PIO_CODR = PIN_LED_L.mask;
+			PIN_LED_R.pio->PIO_CODR = PIN_LED_R.mask;
 		} else {
-			PIN_LED_R.pio->PIO_SODR = PIN_LED_L.mask;
+			PIN_LED_R.pio->PIO_SODR = PIN_LED_R.mask;
 		}
 	}
 
