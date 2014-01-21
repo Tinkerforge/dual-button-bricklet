@@ -31,7 +31,7 @@
 
 #define BRICKLET_FIRMWARE_VERSION_MAJOR 2
 #define BRICKLET_FIRMWARE_VERSION_MINOR 0
-#define BRICKLET_FIRMWARE_VERSION_REVISION 1
+#define BRICKLET_FIRMWARE_VERSION_REVISION 2
 
 #define BRICKLET_HARDWARE_VERSION_MAJOR 1
 #define BRICKLET_HARDWARE_VERSION_MINOR 0
@@ -39,10 +39,10 @@
 
 #define BRICKLET_DEVICE_IDENTIFIER 230
 
-#define PIN_BUTTON_L (BS->pin1_ad)
-#define PIN_LED_L    (BS->pin2_da)
-#define PIN_BUTTON_R (BS->pin3_pwm)
-#define PIN_LED_R    (BS->pin4_io)
+#define PIN_BUTTON_R (BS->pin1_ad)
+#define PIN_LED_R    (BS->pin2_da)
+#define PIN_BUTTON_L (BS->pin3_pwm)
+#define PIN_LED_L    (BS->pin4_io)
 
 #define LOGGING_LEVEL LOGGING_DEBUG
 #define DEBUG_BRICKLET 0
