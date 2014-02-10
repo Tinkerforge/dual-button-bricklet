@@ -7,8 +7,8 @@ use constant HOST => 'localhost';
 use constant PORT => 4223;
 use constant UID => 'fdd'; # Change to your UID
 
-my $ipcon = IPConnection->new(); # Create IP connection
-our $db = BrickletDualButton->new(&UID, $ipcon); # Create device object
+my $ipcon = Tinkerforge::IPConnection->new(); # Create IP connection
+our $db = Tinkerforge::BrickletDualButton->new(&UID, $ipcon); # Create device object
 
 # Callback function for state changed callback
 sub cb_state_changed
