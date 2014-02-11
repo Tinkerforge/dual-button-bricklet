@@ -41,7 +41,7 @@ process.stdin.on('data', function(data) {
 	    ipcon.disconnect(
             function(error) {
                 if(error === IPConnection.ERROR_NOT_CONNECTED) {
-                    console.log('Error: Already disconnected');        
+                    console.log('Error: Not connected');        
                 }
             }
         );
