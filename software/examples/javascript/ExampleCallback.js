@@ -1,12 +1,11 @@
-var IPConnection = require('Tinkerforge/IPConnection');
-var BrickletDualButton = require('Tinkerforge/BrickletDualButton');
+var Tinkerforge = require('tinkerforge');
 
 var HOST = 'localhost';
 var PORT = 4223;
 var UID = 'fdd'; // Change to your UID
 
-var ipcon = new IPConnection(); // Create IP connection
-var db = new BrickletDualButton(UID, ipcon); // Create device object
+var ipcon = new Tinkerforge.IPConnection(); // Create IP connection
+var db = new Tinkerforge.BrickletDualButton(UID, ipcon); // Create device object
 
 ipcon.connect(HOST, PORT,
     function(error) {
@@ -16,15 +15,15 @@ ipcon.connect(HOST, PORT,
 // Don't use device before ipcon is connected
 
 // Register state changed callback
-db.on(BrickletDualButton.CALLBACK_STATE_CHANGED,
+db.on(Tinkerforge.BrickletDualButton.CALLBACK_STATE_CHANGED,
     function(buttonL, buttonR, ledL, ledR) {
-        if(buttonL === BrickletDualButton.BUTTON_STATE_PRESSED) {
+        if(buttonL === Tinkerforge.BrickletDualButton.BUTTON_STATE_PRESSED) {
             console.log('Left button pressed');
         }
         else {
             console.log('Left button Released');
         }
-        if(buttonR === BrickletDualButton.BUTTON_STATE_PRESSED) {
+        if(buttonR === Tinkerforge.BrickletDualButton.BUTTON_STATE_PRESSED) {
             console.log('Right button pressed');
         }
         else{
