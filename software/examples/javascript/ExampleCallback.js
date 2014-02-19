@@ -16,6 +16,7 @@ ipcon.connect(HOST, PORT,
 
 // Register state changed callback
 db.on(Tinkerforge.BrickletDualButton.CALLBACK_STATE_CHANGED,
+    // Callback function for state changed callback
     function(buttonL, buttonR, ledL, ledR) {
         if(buttonL === Tinkerforge.BrickletDualButton.BUTTON_STATE_PRESSED) {
             console.log('Left button pressed');
