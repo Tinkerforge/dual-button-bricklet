@@ -9,9 +9,9 @@ var db = new Tinkerforge.BrickletDualButton(UID, ipcon); // Create device object
 
 ipcon.connect(HOST, PORT,
     function(error) {
-        console.log('Error: '+error);        
+        console.log('Error: '+error);
     }
-);// Connect to brickd
+); // Connect to brickd
 // Don't use device before ipcon is connected
 
 // Register state changed callback
@@ -41,4 +41,3 @@ process.stdin.on('data',
         process.exit(0);
     }
 );
-
