@@ -17,20 +17,20 @@ sub cb_state_changed
 
     if ($button_l == $db->BUTTON_STATE_PRESSED)
     {
-        print "\nLeft button pressed\n";
+        print "Left button pressed\n";
     }    
     else
     {
-        print "\nLeft button released\n";
+        print "Left button released\n";
     }
 
     if ($button_r == $db->BUTTON_STATE_PRESSED)
     {
-        print "\nRight button pressed\n";
+        print "Right button pressed\n";
     }
     else
     {
-        print "\nRight button released\n";
+        print "Right button released\n";
     }
 }
 
@@ -40,7 +40,7 @@ $ipcon->connect(&HOST, &PORT); # Connect to brickd
 # Register state changed callback to function cb_state_changed
 $db->register_callback($db->CALLBACK_STATE_CHANGED, 'cb_state_changed');
 
-print "\nPress any key to exit...\n";
+print "Press any key to exit...\n";
 <STDIN>;
 $ipcon->disconnect();
 
