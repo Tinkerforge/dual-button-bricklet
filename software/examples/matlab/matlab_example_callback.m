@@ -13,20 +13,20 @@ function matlab_example_callback
     % Don't use device before ipcon is connected
 
     % Register state changed callback to function cb_state_changed
-    set(db, 'StateChangedCallback', @(h, e)cb_state_changed(e));
+    set(db, 'StateChangedCallback', @(h, e) cb_state_changed(e));
 
-    input('\nPress any key to exit...\n', 's');
+    input('Press any key to exit...\n', 's');
     ipcon.disconnect();
 end
 
 % Callback function for state changed callback
-function cb_state_changed(states)
-    if states.buttonL == com.tinkerforge.BrickletDualButton.BUTTON_STATE_PRESSED
+function cb_state_changed(e)
+    if e.buttonL == com.tinkerforge.BrickletDualButton.BUTTON_STATE_PRESSED
         fprintf('Left button pressed\n');
     else
         fprintf('Left button released\n');
     end
-    if states.buttonR == com.tinkerforge.BrickletDualButton.BUTTON_STATE_PRESSED
+    if e.buttonR == com.tinkerforge.BrickletDualButton.BUTTON_STATE_PRESSED
         fprintf('Right button pressed\n');
     else
         fprintf('Right button released\n');
