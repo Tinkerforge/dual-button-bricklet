@@ -7,19 +7,19 @@ Module ExampleCallback
 
     ' Callback function for state changed callback
     Sub StateChangedCB(ByVal sender As BrickletDualButton, ByVal buttonL As Byte, ByVal buttonR As Byte, ByVal ledL As Byte, ByVal ledR As Byte)
-		If buttonL = BrickletDualButton.BUTTON_STATE_PRESSED Then
-			System.Console.WriteLine("Left button pressed")
-		Else
-			System.Console.WriteLine("Left button released")
-		End If
+        If buttonL = BrickletDualButton.BUTTON_STATE_PRESSED Then
+            System.Console.WriteLine("Left button pressed")
+        Else
+            System.Console.WriteLine("Left button released")
+        End If
 
-		If buttonR = BrickletDualButton.BUTTON_STATE_PRESSED Then
-			System.Console.WriteLine("Right button pressed")
-		Else
-			System.Console.WriteLine("Right button released")
-		End If
+        If buttonR = BrickletDualButton.BUTTON_STATE_PRESSED Then
+            System.Console.WriteLine("Right button pressed")
+        Else
+            System.Console.WriteLine("Right button released")
+        End If
 
-		System.Console.WriteLine("")
+        System.Console.WriteLine("")
     End Sub
 
     Sub Main()
@@ -33,7 +33,7 @@ Module ExampleCallback
         AddHandler db.StateChanged, AddressOf StateChangedCB
 
         System.Console.WriteLine("Press key to exit")
-        System.Console.ReadKey()
+        System.Console.ReadLine()
         ipcon.Disconnect()
     End Sub
 End Module
