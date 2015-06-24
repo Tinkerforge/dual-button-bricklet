@@ -47,15 +47,14 @@
                             textArea.value += 'Left button pressed\n';
                         }
                         else {
-                            textArea.value += 'Left button Released\n';
+                            textArea.value += 'Left button released\n';
                         }
                         if(buttonR === Tinkerforge.BrickletDualButton.BUTTON_STATE_PRESSED) {
                             textArea.value += 'Right button pressed\n';
                         }
                         else {
-                            textArea.value += 'Right button Released\n';
+                            textArea.value += 'Right button released\n';
                         }
-                        textArea.value += '\n';
                         textArea.scrollTop = textArea.scrollHeight;
                     }
                 );
