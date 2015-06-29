@@ -1,6 +1,6 @@
 function octave_example_callback()
     more off;
-    
+
     HOST = "localhost";
     PORT = 4223;
     UID = "fdd"; % Change to your UID
@@ -20,14 +20,22 @@ end
 
 % Callback function for state changed callback
 function cb_state_changed(e)
-    if str2double(e.buttonL.toString()) == 0
+    if short2int(e.buttonL) == 0
         fprintf("Left button pressed\n");
     else
         fprintf("Left button released\n");
     end
-    if str2double(e.buttonR.toString()) == 0
+    if short2int(e.buttonR) == 0
         fprintf("Right button pressed\n");
     else
         fprintf("Right button released\n");
+    end
+end
+
+function int = short2int(short)
+    if compare_versions(version(), "3.8", "<=")
+        int = short.intValue();
+    else
+        int = short;
     end
 end
