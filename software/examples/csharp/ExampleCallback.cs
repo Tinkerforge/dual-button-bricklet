@@ -32,7 +32,7 @@ class Example
 		System.Console.WriteLine("");
 	}
 
-	static void Main() 
+	static void Main()
 	{
 		IPConnection ipcon = new IPConnection(); // Create IP connection
 		BrickletDualButton db = new BrickletDualButton(UID, ipcon); // Create device object

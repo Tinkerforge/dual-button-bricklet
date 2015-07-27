@@ -37,7 +37,7 @@ int main() {
 
 	// Create device object
 	DualButton db;
-	dual_button_create(&db, UID, &ipcon); 
+	dual_button_create(&db, UID, &ipcon);
 
 	// Connect to brickd
 	if(ipcon_connect(&ipcon, HOST, PORT) < 0) {
