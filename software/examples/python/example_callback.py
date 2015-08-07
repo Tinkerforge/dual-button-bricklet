@@ -6,7 +6,7 @@ PORT = 4223
 UID = "XYZ" # Change to your UID
 
 from tinkerforge.ip_connection import IPConnection
-from tinkerforge.bricklet_dual_button import DualButton
+from tinkerforge.bricklet_dual_button import BrickletDualButton
 
 # Callback function for state changed callback
 def cb_state_changed(button_l, button_r, led_l, led_r):
@@ -24,7 +24,7 @@ def cb_state_changed(button_l, button_r, led_l, led_r):
 
 if __name__ == "__main__":
     ipcon = IPConnection() # Create IP connection
-    db = DualButton(UID, ipcon) # Create device object
+    db = BrickletDualButton(UID, ipcon) # Create device object
 
     ipcon.connect(HOST, PORT) # Connect to brickd
     # Don't use device before ipcon is connected
