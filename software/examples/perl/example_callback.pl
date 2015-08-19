@@ -5,7 +5,7 @@ use Tinkerforge::BrickletDualButton;
 
 use constant HOST => 'localhost';
 use constant PORT => 4223;
-use constant UID => 'fdd'; # Change to your UID
+use constant UID => 'XYZ'; # Change to your UID
 
 my $ipcon = Tinkerforge::IPConnection->new(); # Create IP connection
 our $db = Tinkerforge::BrickletDualButton->new(&UID, $ipcon); # Create device object
@@ -43,4 +43,3 @@ $db->register_callback($db->CALLBACK_STATE_CHANGED, 'cb_state_changed');
 print "Press any key to exit...\n";
 <STDIN>;
 $ipcon->disconnect();
-
