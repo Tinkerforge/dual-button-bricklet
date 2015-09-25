@@ -7,7 +7,7 @@
 #define PORT 4223
 #define UID "XYZ" // Change to your UID
 
-// Callback function for illuminance callback
+// Callback function for state changed callback
 void cb_state_changed(uint8_t button_l, uint8_t button_r, 
                       uint8_t led_l, uint8_t led_r, 
                       void *user_data) {

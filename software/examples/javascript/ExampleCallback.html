@@ -6,7 +6,7 @@
     </head>
     <body>
         <div style="text-align:center;">
-            <h1>Dual Button Callback Example</h1>
+            <h1>Dual Button Bricklet Callback Example</h1>
             <p>
                 <input value="localhost" id="host" type="text" size="20">:
                 <input value="4280" id="port" type="text" size="5">,
@@ -34,7 +34,7 @@
                 var db = new Tinkerforge.BrickletDualButton(UID, ipcon); // Create device object
                 ipcon.connect(HOST, PORT,
                     function(error) {
-                        textArea.value += 'Error: '+error+ '\n';
+                        textArea.value += 'Error: ' + error + '\n';
                     }
                 ); // Connect to brickd
                 // Don't use device before ipcon is connected
@@ -42,7 +42,7 @@
                 // Register state changed callback
                 db.on(Tinkerforge.BrickletDualButton.CALLBACK_STATE_CHANGED,
                     // Callback function for state changed callback
-                    function(buttonL, buttonR, ledL, ledR) {
+                    function (buttonL, buttonR, ledL, ledR) {
                         if(buttonL === Tinkerforge.BrickletDualButton.BUTTON_STATE_PRESSED) {
                             textArea.value += 'Left button pressed\n';
                         }
@@ -55,6 +55,7 @@
                         else {
                             textArea.value += 'Right button released\n';
                         }
+                        textArea.value += '\n';
                         textArea.scrollTop = textArea.scrollHeight;
                     }
                 );

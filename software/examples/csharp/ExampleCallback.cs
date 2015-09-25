@@ -1,3 +1,4 @@
+using System;
 using Tinkerforge;
 
 class Example
@@ -13,23 +14,23 @@ class Example
 	{
 		if(buttonL == BrickletDualButton.BUTTON_STATE_PRESSED)
 		{
-			System.Console.WriteLine("Left button pressed");
+			Console.WriteLine("Left button pressed");
 		} 
 		else
 		{
-			System.Console.WriteLine("Left button released");
+			Console.WriteLine("Left button released");
 		}
 
 		if(buttonR == BrickletDualButton.BUTTON_STATE_PRESSED)
 		{
-			System.Console.WriteLine("Right button pressed");
+			Console.WriteLine("Right button pressed");
 		} 
 		else
 		{
-			System.Console.WriteLine("Right button released");
+			Console.WriteLine("Right button released");
 		}
 
-		System.Console.WriteLine("");
+		Console.WriteLine("");
 	}
 
 	static void Main()
@@ -43,8 +44,8 @@ class Example
 		// Register state changed callback to function StateChangedCB
 		db.StateChanged += StateChangedCB;
 
-		System.Console.WriteLine("Press enter to exit");
-		System.Console.ReadLine();
+		Console.WriteLine("Press enter to exit");
+		Console.ReadLine();
 		ipcon.Disconnect();
 	}
 }

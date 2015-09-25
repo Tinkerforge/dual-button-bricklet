@@ -1,3 +1,4 @@
+Imports System
 Imports Tinkerforge
 
 Module ExampleCallback
@@ -5,23 +6,23 @@ Module ExampleCallback
     Const PORT As Integer = 4223
     Const UID As String = "XYZ" ' Change to your UID
 
-    ' Callback function for state changed callback
+    ' Callback subroutine for state changed callback
     Sub StateChangedCB(ByVal sender As BrickletDualButton, _
                        ByVal buttonL As Byte, ByVal buttonR As Byte, _
                        ByVal ledL As Byte, ByVal ledR As Byte)
         If buttonL = BrickletDualButton.BUTTON_STATE_PRESSED Then
-            System.Console.WriteLine("Left button pressed")
+            Console.WriteLine("Left button pressed")
         Else
-            System.Console.WriteLine("Left button released")
+            Console.WriteLine("Left button released")
         End If
 
         If buttonR = BrickletDualButton.BUTTON_STATE_PRESSED Then
-            System.Console.WriteLine("Right button pressed")
+            Console.WriteLine("Right button pressed")
         Else
-            System.Console.WriteLine("Right button released")
+            Console.WriteLine("Right button released")
         End If
 
-        System.Console.WriteLine("")
+        Console.WriteLine("")
     End Sub
 
     Sub Main()
@@ -31,11 +32,11 @@ Module ExampleCallback
         ipcon.Connect(HOST, PORT) ' Connect to brickd
         ' Don't use device before ipcon is connected
 
-        ' Register state changed callback to function StateChangedCB
+        ' Register state changed callback to subroutine StateChangedCB
         AddHandler db.StateChanged, AddressOf StateChangedCB
 
-        System.Console.WriteLine("Press key to exit")
-        System.Console.ReadLine()
+        Console.WriteLine("Press key to exit")
+        Console.ReadLine()
         ipcon.Disconnect()
     End Sub
 End Module

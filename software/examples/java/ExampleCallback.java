@@ -6,8 +6,8 @@ public class ExampleCallback {
 	private static final int PORT = 4223;
 	private static final String UID = "XYZ"; // Change to your UID
 
-	// Note: To make the example code cleaner we do not handle exceptions. Exceptions you
-	//       might normally want to catch are described in the documentation
+	// Note: To make the example code cleaner we do not handle exceptions. Exceptions
+	//       you might normally want to catch are described in the documentation
 	public static void main(String args[]) throws Exception {
 		IPConnection ipcon = new IPConnection(); // Create IP connection
 		BrickletDualButton db = new BrickletDualButton(UID, ipcon); // Create device object
@@ -15,7 +15,7 @@ public class ExampleCallback {
 		ipcon.connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
-		// Add and implement state changed listener
+		// Add state changed listener
 		db.addStateChangedListener(new BrickletDualButton.StateChangedListener() {
 			public void stateChanged(short buttonL, short buttonR, short ledL, short ledR) {
 				if(buttonL == BrickletDualButton.BUTTON_STATE_PRESSED) {

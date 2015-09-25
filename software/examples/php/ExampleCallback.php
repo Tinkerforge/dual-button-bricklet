@@ -10,8 +10,8 @@ const HOST = 'localhost';
 const PORT = 4223;
 const UID = 'XYZ'; // Change to your UID
 
-// Callback function for state_changed callback
-function cb_state_changed($button_l, $button_r, $led_l, $led_r)
+// Callback function for state changed callback
+function cb_stateChanged($button_l, $button_r, $led_l, $led_r)
 {
     if($button_l == BrickletDualButton::BUTTON_STATE_PRESSED) {
         echo "Left button pressed\n";
@@ -29,13 +29,13 @@ function cb_state_changed($button_l, $button_r, $led_l, $led_r)
 }
 
 $ipcon = new IPConnection(); // Create IP connection
-$al = new BrickletDualButton(UID, $ipcon); // Create device object
+$db = new BrickletDualButton(UID, $ipcon); // Create device object
 
 $ipcon->connect(HOST, PORT); // Connect to brickd
 // Don't use device before ipcon is connected
 
-// Register state changed callback to function cb_state_changed
-$al->registerCallback(BrickletDualButton::CALLBACK_STATE_CHANGED, 'cb_state_changed');
+// Register state changed callback to function cb_stateChanged
+$db->registerCallback(BrickletDualButton::CALLBACK_STATE_CHANGED, 'cb_stateChanged');
 
 echo "Press ctrl+c to exit\n";
 $ipcon->dispatchCallbacks(-1); // Dispatch callbacks forever

@@ -26,7 +26,7 @@ const
 var
   e: TExample;
 
-{ Callback function for state changed callback }
+{ Callback procedure for state changed callback }
 procedure TExample.StateChangedCB(sender: TBrickletDualButton; 
                                   const buttonL: byte; const buttonR: byte; 
                                   const ledL: byte; const ledR: byte);

@@ -3,7 +3,7 @@ function octave_example_callback()
 
     HOST = "localhost";
     PORT = 4223;
-    UID = "fdd"; % Change to your UID
+    UID = "XYZ"; % Change to your UID
 
     ipcon = java_new("com.tinkerforge.IPConnection"); % Create IP connection
     db = java_new("com.tinkerforge.BrickletDualButton", UID, ipcon); % Create device object
@@ -14,28 +14,29 @@ function octave_example_callback()
     % Register state changed callback to function cb_state_changed
     db.addStateChangedCallback(@cb_state_changed);
 
-    input("Press any key to exit...\n", "s");
+    input("Press key to exit\n", "s");
     ipcon.disconnect();
 end
 
 % Callback function for state changed callback
 function cb_state_changed(e)
-    if short2int(e.buttonL) == 0
+    if java2int(e.buttonL) == 0
         fprintf("Left button pressed\n");
     else
         fprintf("Left button released\n");
     end
-    if short2int(e.buttonR) == 0
+    if java2int(e.buttonR) == 0
         fprintf("Right button pressed\n");
     else
         fprintf("Right button released\n");
     end
+    fprintf("\n");
 end
 
-function int = short2int(short)
+function int = java2int(value)
     if compare_versions(version(), "3.8", "<=")
-        int = short.intValue();
+        int = value.intValue();
     else
-        int = short;
+        int = value;
     end
 end

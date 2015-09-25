@@ -2,14 +2,14 @@ var Tinkerforge = require('tinkerforge');
 
 var HOST = 'localhost';
 var PORT = 4223;
-var UID = 'fdd'; // Change to your UID
+var UID = 'XYZ'; // Change to your UID
 
 var ipcon = new Tinkerforge.IPConnection(); // Create IP connection
 var db = new Tinkerforge.BrickletDualButton(UID, ipcon); // Create device object
 
 ipcon.connect(HOST, PORT,
-    function(error) {
-        console.log('Error: '+error);
+    function (error) {
+        console.log('Error: ' + error);
     }
 ); // Connect to brickd
 // Don't use device before ipcon is connected
@@ -17,7 +17,7 @@ ipcon.connect(HOST, PORT,
 // Register state changed callback
 db.on(Tinkerforge.BrickletDualButton.CALLBACK_STATE_CHANGED,
     // Callback function for state changed callback
-    function(buttonL, buttonR, ledL, ledR) {
+    function (buttonL, buttonR, ledL, ledR) {
         if(buttonL === Tinkerforge.BrickletDualButton.BUTTON_STATE_PRESSED) {
             console.log('Left button pressed');
         }
@@ -34,9 +34,9 @@ db.on(Tinkerforge.BrickletDualButton.CALLBACK_STATE_CHANGED,
     }
 );
 
-console.log("Press any key to exit ...");
+console.log('Press key to exit');
 process.stdin.on('data',
-    function(data) {
+    function (data) {
         ipcon.disconnect();
         process.exit(0);
     }

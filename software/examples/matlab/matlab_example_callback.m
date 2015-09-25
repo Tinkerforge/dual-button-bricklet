@@ -4,8 +4,8 @@ function matlab_example_callback()
 
     HOST = 'localhost';
     PORT = 4223;
-    UID = 'fdd'; % Change to your UID
-    
+    UID = 'XYZ'; % Change to your UID
+
     ipcon = IPConnection(); % Create IP connection
     db = BrickletDualButton(UID, ipcon); % Create device object
 
@@ -15,7 +15,7 @@ function matlab_example_callback()
     % Register state changed callback to function cb_state_changed
     set(db, 'StateChangedCallback', @(h, e) cb_state_changed(e));
 
-    input('Press any key to exit...\n', 's');
+    input('Press key to exit\n', 's');
     ipcon.disconnect();
 end
 
@@ -31,4 +31,5 @@ function cb_state_changed(e)
     else
         fprintf('Right button released\n');
     end
+    fprintf('\n');
 end
