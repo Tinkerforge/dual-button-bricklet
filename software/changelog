@@ -1,8 +1,8 @@
-2.0.0:
+2013-10-18: 2.0.0 (8617128)
 - Initial version
 
-2.0.1:
+2014-01-20: 2.0.1 (21475d6)
 - Fix selected_led_state bug
 
-2.0.2:
+2014-01-21: 2.0.2 (487af42)
 - Fix left/right button permutation
