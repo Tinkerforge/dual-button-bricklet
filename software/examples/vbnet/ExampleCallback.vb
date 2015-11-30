@@ -8,8 +8,7 @@ Module ExampleCallback
 
     ' Callback subroutine for state changed callback
     Sub StateChangedCB(ByVal sender As BrickletDualButton, _
-                       ByVal buttonL As Byte, ByVal buttonR As Byte, _
-                       ByVal ledL As Byte, ByVal ledR As Byte)
+                       ByVal buttonL As Byte, ByVal buttonR As Byte, ByVal ledL As Byte, ByVal ledR As Byte)
         If buttonL = BrickletDualButton.BUTTON_STATE_PRESSED Then
             Console.WriteLine("Left button pressed")
         Else
