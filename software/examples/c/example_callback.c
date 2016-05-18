@@ -54,6 +54,7 @@ int main(void) {
 
 	printf("Press key to exit\n");
 	getchar();
+	dual_button_destroy(&db);
 	ipcon_destroy(&ipcon); // Calls ipcon_disconnect internally
 	return 0;
 }
