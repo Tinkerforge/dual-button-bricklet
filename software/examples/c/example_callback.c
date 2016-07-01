@@ -5,11 +5,10 @@
 
 #define HOST "localhost"
 #define PORT 4223
-#define UID "XYZ" // Change to your UID
+#define UID "XYZ" // Change XYZ to the UID of your Dual Button Bricklet
 
 // Callback function for state changed callback
-void cb_state_changed(uint8_t button_l, uint8_t button_r, 
-                      uint8_t led_l, uint8_t led_r, 
+void cb_state_changed(uint8_t button_l, uint8_t button_r, uint8_t led_l, uint8_t led_r,
                       void *user_data) {
 	(void)led_l; // avoid unused parameter warning
 	(void)led_r; // avoid unused parameter warning

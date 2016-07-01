@@ -8,7 +8,7 @@ use Tinkerforge\BrickletDualButton;
 
 const HOST = 'localhost';
 const PORT = 4223;
-const UID = 'XYZ'; // Change to your UID
+const UID = 'XYZ'; // Change XYZ to the UID of your Dual Button Bricklet
 
 // Callback function for state changed callback
 function cb_stateChanged($button_l, $button_r, $led_l, $led_r)

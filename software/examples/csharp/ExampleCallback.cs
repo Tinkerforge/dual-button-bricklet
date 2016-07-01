@@ -5,11 +5,10 @@ class Example
 {
 	private static string HOST = "localhost";
 	private static int PORT = 4223;
-	private static string UID = "XYZ"; // Change to your UID
+	private static string UID = "XYZ"; // Change XYZ to the UID of your Dual Button Bricklet
 
 	// Callback function for state changed callback
-	static void StateChangedCB(BrickletDualButton sender, 
-	                           byte buttonL, byte buttonR, 
+	static void StateChangedCB(BrickletDualButton sender, byte buttonL, byte buttonR,
 	                           byte ledL, byte ledR)
 	{
 		if(buttonL == BrickletDualButton.BUTTON_STATE_PRESSED)

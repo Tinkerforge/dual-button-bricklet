@@ -4,11 +4,11 @@ Imports Tinkerforge
 Module ExampleCallback
     Const HOST As String = "localhost"
     Const PORT As Integer = 4223
-    Const UID As String = "XYZ" ' Change to your UID
+    Const UID As String = "XYZ" ' Change XYZ to the UID of your Dual Button Bricklet
 
     ' Callback subroutine for state changed callback
-    Sub StateChangedCB(ByVal sender As BrickletDualButton, _
-                       ByVal buttonL As Byte, ByVal buttonR As Byte, ByVal ledL As Byte, ByVal ledR As Byte)
+    Sub StateChangedCB(ByVal sender As BrickletDualButton, ByVal buttonL As Byte, _
+                       ByVal buttonR As Byte, ByVal ledL As Byte, ByVal ledR As Byte)
         If buttonL = BrickletDualButton.BUTTON_STATE_PRESSED Then
             Console.WriteLine("Left button pressed")
         Else

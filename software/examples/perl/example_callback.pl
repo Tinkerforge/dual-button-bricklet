@@ -5,7 +5,7 @@ use Tinkerforge::BrickletDualButton;
 
 use constant HOST => 'localhost';
 use constant PORT => 4223;
-use constant UID => 'XYZ'; # Change to your UID
+use constant UID => 'XYZ'; # Change XYZ to the UID of your Dual Button Bricklet
 
 # Callback subroutine for state changed callback
 sub cb_state_changed

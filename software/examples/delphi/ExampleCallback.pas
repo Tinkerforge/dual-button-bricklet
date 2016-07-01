@@ -12,24 +12,23 @@ type
     ipcon: TIPConnection;
     db: TBrickletDualButton;
   public
-    procedure StateChangedCB(sender: TBrickletDualButton;                                   
-                             const buttonL: byte; const buttonR: byte; 
-                             const ledL: byte; const ledR: byte);
+    procedure StateChangedCB(sender: TBrickletDualButton; const buttonL: byte;
+                             const buttonR: byte; const ledL: byte; const ledR: byte);
     procedure Execute;
   end;
 
 const
   HOST = 'localhost';
   PORT = 4223;
-  UID = 'XYZ'; { Change to your UID }
+  UID = 'XYZ'; { Change XYZ to the UID of your Dual Button Bricklet }
 
 var
   e: TExample;
 
 { Callback procedure for state changed callback }
-procedure TExample.StateChangedCB(sender: TBrickletDualButton; 
-                                  const buttonL: byte; const buttonR: byte; 
-                                  const ledL: byte; const ledR: byte);
+procedure TExample.StateChangedCB(sender: TBrickletDualButton; const buttonL: byte;
+                                  const buttonR: byte; const ledL: byte;
+                                  const ledR: byte);
 begin
   if (buttonL = BRICKLET_DUAL_BUTTON_BUTTON_STATE_PRESSED) then begin
     WriteLn('Left button pressed');
