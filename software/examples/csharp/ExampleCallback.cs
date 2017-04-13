@@ -41,7 +41,7 @@ class Example
 		// Don't use device before ipcon is connected
 
 		// Register state changed callback to function StateChangedCB
-		db.StateChanged += StateChangedCB;
+		db.StateChangedCallback += StateChangedCB;
 
 		Console.WriteLine("Press enter to exit");
 		Console.ReadLine();
