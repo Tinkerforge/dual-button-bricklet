@@ -10,12 +10,12 @@ from tinkerforge.bricklet_dual_button import BrickletDualButton
 
 # Callback function for state changed callback
 def cb_state_changed(button_l, button_r, led_l, led_r):
-    if button_l == DualButton.BUTTON_STATE_PRESSED:
+    if button_l == BrickletDualButton.BUTTON_STATE_PRESSED:
         print("Left button pressed")
     else:
         print("Left button released")
 
-    if button_r == DualButton.BUTTON_STATE_PRESSED:
+    if button_r == BrickletDualButton.BUTTON_STATE_PRESSED:
         print("Right button pressed")
     else:
         print("Right button released")
