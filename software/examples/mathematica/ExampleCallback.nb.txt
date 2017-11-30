@@ -24,7 +24,7 @@ StateChangedCB[sender_,buttonL_,buttonR_,ledL_,ledR_]:=
   Print[""]
  ]
 
-AddEventHandler[db@StateChanged,StateChangedCB]
+AddEventHandler[db@StateChangedCallback,StateChangedCB]
 
 Input["Click OK to exit"]
 

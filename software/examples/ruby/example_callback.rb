@@ -17,7 +17,7 @@ ipcon.connect HOST, PORT # Connect to brickd
 # Don't use device before ipcon is connected
 
 # Register state changed callback
-db.register_callback(BrickletDualButton::CALLBACK_STATE_CHANGED) do |button_l, button_r, \
+db.register_callback(BrickletDualButton::CALLBACK_STATE_CHANGED) do |button_l, button_r,
                                                                      led_l, led_r|
   if button_l == BrickletDualButton::BUTTON_STATE_PRESSED
     puts 'Left button pressed'

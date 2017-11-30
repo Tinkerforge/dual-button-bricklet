@@ -32,7 +32,7 @@ Module ExampleCallback
         ' Don't use device before ipcon is connected
 
         ' Register state changed callback to subroutine StateChangedCB
-        AddHandler db.StateChanged, AddressOf StateChangedCB
+        AddHandler db.StateChangedCallback, AddressOf StateChangedCB
 
         Console.WriteLine("Press key to exit")
         Console.ReadLine()
