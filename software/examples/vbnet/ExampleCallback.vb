@@ -10,15 +10,15 @@ Module ExampleCallback
     Sub StateChangedCB(ByVal sender As BrickletDualButton, ByVal buttonL As Byte, _
                        ByVal buttonR As Byte, ByVal ledL As Byte, ByVal ledR As Byte)
         If buttonL = BrickletDualButton.BUTTON_STATE_PRESSED Then
-            Console.WriteLine("Left button pressed")
-        Else
-            Console.WriteLine("Left button released")
+            Console.WriteLine("Left Button: Pressed")
+        Else If buttonL = BrickletDualButton.BUTTON_STATE_RELEASED Then
+            Console.WriteLine("Left Button: Released")
         End If
 
         If buttonR = BrickletDualButton.BUTTON_STATE_PRESSED Then
-            Console.WriteLine("Right button pressed")
-        Else
-            Console.WriteLine("Right button released")
+            Console.WriteLine("Right Button: Pressed")
+        Else If buttonR = BrickletDualButton.BUTTON_STATE_RELEASED Then
+            Console.WriteLine("Right Button: Released")
         End If
 
         Console.WriteLine("")

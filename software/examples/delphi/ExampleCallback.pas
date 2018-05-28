@@ -31,17 +31,17 @@ procedure TExample.StateChangedCB(sender: TBrickletDualButton; const buttonL: by
                                   const ledR: byte);
 begin
   if (buttonL = BRICKLET_DUAL_BUTTON_BUTTON_STATE_PRESSED) then begin
-    WriteLn('Left button pressed');
+    WriteLn('Left Button: Pressed');
   end
-  else begin
-    WriteLn('Left button released');
+  else if (buttonL = BRICKLET_DUAL_BUTTON_BUTTON_STATE_RELEASED) then begin
+    WriteLn('Left Button: Released');
   end;
 
   if (buttonR = BRICKLET_DUAL_BUTTON_BUTTON_STATE_PRESSED) then begin
-    WriteLn('Right button pressed');
+    WriteLn('Right Button: Pressed');
   end
-  else begin
-    WriteLn('Right button released');
+  else if (buttonR = BRICKLET_DUAL_BUTTON_BUTTON_STATE_RELEASED) then begin
+    WriteLn('Right Button: Released');
   end;
 
   WriteLn('');
