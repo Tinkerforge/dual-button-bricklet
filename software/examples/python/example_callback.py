@@ -32,5 +32,5 @@ if __name__ == "__main__":
     # Register state changed callback to function cb_state_changed
     db.register_callback(db.CALLBACK_STATE_CHANGED, cb_state_changed)
 
-    raw_input("Press key to exit\n") # Use input() in Python 3
+    input("Press key to exit\n") # Use raw_input() in Python 2
     ipcon.disconnect()
